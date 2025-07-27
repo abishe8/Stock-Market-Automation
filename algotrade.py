@@ -7,7 +7,7 @@ import xlwings as xw
 import sys
 import signal
 import logging
-import winsound
+#import winsound
 import pytz
 import re
 
@@ -74,7 +74,7 @@ class ZerodhaExcelTradingSystem:
                 ['API Key', ''],
                 ['API Secret', ''],
                 ['Access Token', ''],
-                ['Polling Interval', 60],
+                ['Polling Interval', 20],
                 ['Paper Trading', False]
             ]
             config_sheet.range('A1').value = config_data
@@ -529,7 +529,7 @@ class ZerodhaExcelTradingSystem:
             order_sheet.range(f'K{row_num}').color = (255, 255, 0)
             self.wb.save()
             logging.info(f"Processing BUY order for {stock_code} ({exchange})...")
-            winsound.Beep(1000, 200)
+            #winsound.Beep(1000, 200)
 
             ltp_data = {}
             if self.is_market_open():
@@ -552,7 +552,7 @@ class ZerodhaExcelTradingSystem:
                 order_sheet.range(f'K{row_num}').color = (255, 0, 0)
                 self.wb.save()
                 logging.info(status)
-                winsound.Beep(500, 500)
+                #winsound.Beep(500, 500)
                 return
 
             if not self.paper_trading:
@@ -597,7 +597,7 @@ class ZerodhaExcelTradingSystem:
                     order_sheet.range(f'K{row_num}').color = (0, 255, 0)
                     self.wb.save()
                     logging.info(status)
-                    winsound.Beep(1500, 300)
+                    #winsound.Beep(1500, 300)
 
                     # Check for stop loss if Order Type is 'cover'
                     stop_loss_price = order.get('Stop Loss Price', None)
@@ -657,14 +657,14 @@ class ZerodhaExcelTradingSystem:
                     order_sheet.range(f'K{row_num}').color = (255, 0, 0)
                     self.wb.save()
                     logging.error(status)
-                    winsound.Beep(500, 500)
+                    #winsound.Beep(500, 500)
             else:
                 status = "Bought (Paper Trading)"
                 order_sheet.range(f'K{row_num}').value = status
                 order_sheet.range(f'K{row_num}').color = (0, 255, 0)
                 self.wb.save()
                 logging.info(status)
-                winsound.Beep(1500, 300)
+                #winsound.Beep(1500, 300)
                 
                 history_sheet = self.wb.sheets['Order History']
                 last_row = history_sheet.range('A' + str(history_sheet.cells.last_cell.row)).end('up').row
@@ -686,7 +686,7 @@ class ZerodhaExcelTradingSystem:
             order_sheet.range(f'K{row_num}').color = (255, 0, 0)
             self.wb.save()
             logging.error(f"Error processing buy order: {e}")
-            winsound.Beep(500, 500)
+            #winsound.Beep(500, 500)
 
     def process_sell_order(self, order, row_num):
         """Process a sell order"""
@@ -703,7 +703,7 @@ class ZerodhaExcelTradingSystem:
             order_sheet.range(f'K{row_num}').color = (255, 255, 0)
             self.wb.save()
             logging.info(f"Processing SELL order for {stock_code} ({exchange})...")
-            winsound.Beep(1000, 200)
+            #winsound.Beep(1000, 200)
 
             ltp_data = {}
             if self.is_market_open():
@@ -748,7 +748,7 @@ class ZerodhaExcelTradingSystem:
                     order_sheet.range(f'K{row_num}').color = (0, 255, 0)
                     self.wb.save()
                     logging.info(status)
-                    winsound.Beep(1500, 300)
+                    #winsound.Beep(1500, 300)
                     
                     ltp = ltp_data[symbol]['last_price'] if symbol in ltp_data else (sell_price if sell_price else 0)
                     profit_loss = (sell_price if sell_price else ltp) * order['Quantity']
@@ -773,14 +773,14 @@ class ZerodhaExcelTradingSystem:
                     order_sheet.range(f'K{row_num}').color = (255, 0, 0)
                     self.wb.save()
                     logging.error(status)
-                    winsound.Beep(500, 500)
+                    #winsound.Beep(500, 500)
             else:
                 status = "Sold (Paper Trading)"
                 order_sheet.range(f'K{row_num}').value = status
                 order_sheet.range(f'K{row_num}').color = (0, 255, 0)
                 self.wb.save()
                 logging.info(status)
-                winsound.Beep(1500, 300)
+                #winsound.Beep(1500, 300)
                 
                 history_sheet = self.wb.sheets['Order History']
                 last_row = history_sheet.range('A' + str(history_sheet.cells.last_cell.row)).end('up').row
@@ -802,7 +802,7 @@ class ZerodhaExcelTradingSystem:
             order_sheet.range(f'K{row_num}').color = (255, 0, 0)
             self.wb.save()
             logging.error(f"Error processing sell order: {e}")
-            winsound.Beep(500, 500)
+            #winsound.Beep(500, 500)
 
     def save_excel(self):
         """Save Excel file with retry"""
