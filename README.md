@@ -1,6 +1,6 @@
 # Zerodha Excel Trading System
 
-# DISCLAIMER: ANY LOSSES INCURRED VIA THE EXCEL TRADING SYSTEM ARE AT THE USER'S OWN RISK 
+# DISCLAIMER: ANY LOSSES INCURRED VIA THE EXCEL TRADING SYSTEM ARE AT THE USER'S OWN RISK
 
 The **Zerodha Excel Trading System** is a Python-based application that integrates with the Zerodha KiteConnect API to automate stock trading and portfolio management using an Excel workbook (`Trading_System.xlsx`). It allows users to monitor market data, place buy/sell orders, and generate daily trade summaries, all managed through a user-friendly Excel interface. The application supports both live trading and paper trading modes, making it suitable for testing strategies without risking real funds.
 
